@@ -1,0 +1,14 @@
+# 默认主配置
+spring:
+  profiles: 
+    active: dev
+    
+# server
+server: 
+  port: 9999
+  
+# mybatis
+mybatis: 
+  mapper-locations: classpath:com/hmm/web/mapper/*.xml
+  
+

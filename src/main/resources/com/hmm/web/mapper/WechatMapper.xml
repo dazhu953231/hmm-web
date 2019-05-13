@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hmm.web.dao.WechatMapper">
+  <resultMap id="BaseResultMap" type="com.hmm.web.domain.Wechat">
+    <id column="wechat_id" jdbcType="BIGINT" property="wechatId" />
+    <result column="wechat_uin" jdbcType="VARCHAR" property="wechatUin" />
+    <result column="device_id" jdbcType="BIGINT" property="deviceId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hmm.web.domain.Wechat">
+    <result column="wechat_name" jdbcType="BINARY" property="wechatName" />
+  </resultMap>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    wechat_id,wechat_uin,device_id,status,update_time,create_time,wechat_name
+    from hmm_wechat
+    where wechat_id = #{wechatId,jdbcType=BIGINT}
+  </select>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="wechatId" parameterType="com.hmm.web.domain.Wechat">
+    insert into hmm_wechat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wechatId != null">
+        wechat_id,
+      </if>
+      <if test="wechatUin != null">
+        wechat_uin,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="wechatName != null">
+        wechat_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wechatId != null">
+        #{wechatId,jdbcType=BIGINT},
+      </if>
+      <if test="wechatUin != null">
+        #{wechatUin,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="wechatName != null">
+        #{wechatName,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hmm.web.domain.Wechat">
+    update hmm_wechat
+    <set>
+      <if test="wechatUin != null">
+        wechat_uin = #{wechatUin,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="wechatName != null">
+        wechat_name = #{wechatName,jdbcType=BINARY},
+      </if>
+    </set>
+    where wechat_id = #{wechatId,jdbcType=BIGINT}
+  </update>
+
+</mapper>

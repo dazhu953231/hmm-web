@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hmm.web.dao.GroupMapper">
+  <resultMap id="BaseResultMap" type="com.hmm.web.domain.Group">
+    <id column="group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="group_uin" jdbcType="VARCHAR" property="groupUin" />
+    <result column="group_members" jdbcType="BIGINT" property="groupMembers" />
+    <result column="platform_list_id" jdbcType="BIGINT" property="platformListId" />
+    <result column="platform_list_name" jdbcType="VARCHAR" property="platformListName" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hmm.web.domain.GroupWithBLOBs">
+    <result column="display_name" jdbcType="BINARY" property="displayName" />
+    <result column="nick_name" jdbcType="BINARY" property="nickName" />
+  </resultMap>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    group_id,group_uin,group_members,platform_list_id,platform_list_name,status,update_time,create_time,display_name,nick_name
+    from hmm_group
+    where group_id = #{groupId,jdbcType=BIGINT}
+  </select>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="groupId" parameterType="com.hmm.web.domain.GroupWithBLOBs">
+    insert into hmm_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupUin != null">
+        group_uin,
+      </if>
+      <if test="groupMembers != null">
+        group_members,
+      </if>
+      <if test="platformListId != null">
+        platform_list_id,
+      </if>
+      <if test="platformListName != null">
+        platform_list_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="displayName != null">
+        display_name,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupUin != null">
+        #{groupUin,jdbcType=VARCHAR},
+      </if>
+      <if test="groupMembers != null">
+        #{groupMembers,jdbcType=BIGINT},
+      </if>
+      <if test="platformListId != null">
+        #{platformListId,jdbcType=BIGINT},
+      </if>
+      <if test="platformListName != null">
+        #{platformListName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="displayName != null">
+        #{displayName,jdbcType=BINARY},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hmm.web.domain.GroupWithBLOBs">
+    update hmm_group
+    <set>
+      <if test="groupUin != null">
+        group_uin = #{groupUin,jdbcType=VARCHAR},
+      </if>
+      <if test="groupMembers != null">
+        group_members = #{groupMembers,jdbcType=BIGINT},
+      </if>
+      <if test="platformListId != null">
+        platform_list_id = #{platformListId,jdbcType=BIGINT},
+      </if>
+      <if test="platformListName != null">
+        platform_list_name = #{platformListName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="displayName != null">
+        display_name = #{displayName,jdbcType=BINARY},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=BINARY},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=BIGINT}
+  </update>
+
+</mapper>

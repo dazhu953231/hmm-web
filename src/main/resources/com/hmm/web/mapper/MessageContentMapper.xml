@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hmm.web.dao.MessageContentMapper" >
+  <resultMap id="BaseResultMap" type="com.hmm.web.domain.MessageContent" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="message_jm_id" property="messageJmId" jdbcType="BIGINT" />
+    <result column="jm_id" property="jmId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hmm.web.domain.MessageContent" extends="BaseResultMap" >
+    <result column="msg_content" property="msgContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    id,message_jm_id,jm_id,msg_content,status,update_time,create_time 
+    from hzz_message_content 
+    where id = #{id} 
+  </select>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hmm.web.domain.MessageContent" >
+    insert into hzz_message_content 
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="messageJmId != null" >
+        message_jm_id,
+      </if>
+      <if test="jmId != null" >
+        jm_id,
+      </if>
+      <if test="msgContent != null" >
+        msg_content,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="messageJmId != null" >
+        #{messageJmId},
+      </if>
+      <if test="jmId != null" >
+        #{jmId},
+      </if>
+      <if test="msgContent != null" >
+        #{msgContent},
+      </if>
+      <if test="status != null" >
+        #{status},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hmm.web.domain.MessageContent" >
+    update hzz_message_content 
+    <set>
+      <if test="messageJmId != null" >
+        message_jm_id = #{messageJmId},
+      </if>
+      <if test="jmId != null" >
+        jm_id = #{jmId},
+      </if>
+      <if test="msgContent != null" >
+        msg_content = #{msgContent},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+    </set>
+    where id = #{id} 
+  </update>
+  
+</mapper>

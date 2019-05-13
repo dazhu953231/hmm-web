@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hmm.web.dao.WechatGroupRelateMapper">
+  <resultMap id="BaseResultMap" type="com.hmm.web.domain.WechatGroupRelate">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wechat_id" jdbcType="BIGINT" property="wechatId" />
+    <result column="wechat_uin" jdbcType="VARCHAR" property="wechatUin" />
+    <result column="group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="group_uin" jdbcType="VARCHAR" property="groupUin" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+  </resultMap>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    id,wechat_id,wechat_uin,group_id,group_uin,status,update_time,create_time
+    from hmm_wechat_group_relate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hmm.web.domain.WechatGroupRelate">
+    insert into hmm_wechat_group_relate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wechatId != null">
+        wechat_id,
+      </if>
+      <if test="wechatUin != null">
+        wechat_uin,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupUin != null">
+        group_uin,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wechatId != null">
+        #{wechatId,jdbcType=BIGINT},
+      </if>
+      <if test="wechatUin != null">
+        #{wechatUin,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupUin != null">
+        #{groupUin,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hmm.web.domain.WechatGroupRelate">
+    update hmm_wechat_group_relate
+    <set>
+      <if test="wechatId != null">
+        wechat_id = #{wechatId,jdbcType=BIGINT},
+      </if>
+      <if test="wechatUin != null">
+        wechat_uin = #{wechatUin,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupUin != null">
+        group_uin = #{groupUin,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

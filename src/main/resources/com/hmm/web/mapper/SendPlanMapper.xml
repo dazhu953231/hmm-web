@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hmm.web.dao.SendPlanMapper">
+  <resultMap id="BaseResultMap" type="com.hmm.web.domain.SendPlan">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="start_time" jdbcType="BIGINT" property="startTime" />
+    <result column="end_time" jdbcType="BIGINT" property="endTime" />
+    <result column="message_send_interval" jdbcType="INTEGER" property="messageSendInterval" />
+    <result column="platform_list_id" jdbcType="BIGINT" property="platformListId" />
+    <result column="plan_comment" jdbcType="VARCHAR" property="planComment" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+  </resultMap>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    id,start_time,end_time,message_send_interval,platform_list_id,plan_comment,status,update_time,create_time
+    from hmm_send_plan
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hmm.web.domain.SendPlan">
+    insert into hmm_send_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="messageSendInterval != null">
+        message_send_interval,
+      </if>
+      <if test="platformListId != null">
+        platform_list_id,
+      </if>
+      <if test="planComment != null">
+        plan_comment,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="messageSendInterval != null">
+        #{messageSendInterval,jdbcType=INTEGER},
+      </if>
+      <if test="platformListId != null">
+        #{platformListId,jdbcType=BIGINT},
+      </if>
+      <if test="planComment != null">
+        #{planComment,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hmm.web.domain.SendPlan">
+    update hmm_send_plan
+    <set>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="messageSendInterval != null">
+        message_send_interval = #{messageSendInterval,jdbcType=INTEGER},
+      </if>
+      <if test="platformListId != null">
+        platform_list_id = #{platformListId,jdbcType=BIGINT},
+      </if>
+      <if test="planComment != null">
+        plan_comment = #{planComment,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>
