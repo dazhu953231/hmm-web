@@ -1,0 +1,139 @@
+DROP TABLE IF EXISTS `hmm_device`;
+CREATE TABLE `hmm_device` (
+  `device_id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '设备id',
+  `device_no` varchar(255) DEFAULT NULL COMMENT '设备号',
+  `jm_id` varchar(255) DEFAULT NULL COMMENT '极光id',
+  `status` int(11) DEFAULT NULL COMMENT '状态 0:不可用 1:可用',
+  `update_time` bigint(32) DEFAULT NULL COMMENT '修改时间',
+  `create_time` bigint(32) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`device_id`),
+  KEY `device_no` (`device_no`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='设备信息表';
+
+DROP TABLE IF EXISTS `hmm_group`;
+CREATE TABLE `hmm_group` (
+  `group_id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '微信群主键id',
+  `group_uin` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '微信群uin',
+  `display_name` tinyblob COMMENT '微信群展示名',
+  `nick_name` tinyblob COMMENT '微信群呢名',
+  `group_members` bigint(20) DEFAULT NULL COMMENT '微信群人数',
+  `platform_list_id` bigint(20) DEFAULT NULL COMMENT '发送列表id',
+  `platform_list_name` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '发送列表名称',
+  `status` int(11) DEFAULT '1' COMMENT '状态 0：异常 1：正常:2被管理',
+  `update_time` bigint(32) DEFAULT NULL COMMENT '修改时间',
+  `create_time` bigint(32) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`group_id`),
+  KEY `group_uin` (`group_uin`) USING BTREE,
+  KEY `platform_list_id` (`platform_list_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='微信群信息';
+
+DROP TABLE IF EXISTS `hmm_message_content`;
+CREATE TABLE `hmm_message_content` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `message_jm_id` bigint(20) DEFAULT NULL,
+  `jm_id` varchar(255) DEFAULT NULL,
+  `msg_content` text,
+  `status` int(11) DEFAULT NULL COMMENT '状态 0:不可用 1:可用',
+  `update_time` bigint(20) DEFAULT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='消息内容';
+
+DROP TABLE IF EXISTS `hmm_message_jm`;
+CREATE TABLE `hmm_message_jm` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `jm_schedule_id` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '极光定时id',
+  `platform_plan_id` bigint(20) DEFAULT NULL COMMENT '发送计划id',
+  `message_count` bigint(20) DEFAULT NULL COMMENT '单条内容发送量',
+  `platform_list_id` bigint(20) DEFAULT NULL COMMENT '发送列表id',
+  `platform_content_id` bigint(20) DEFAULT NULL COMMENT '发送内容id',
+  `send_time` bigint(20) DEFAULT NULL COMMENT '发送时间',
+  `status` int(11) DEFAULT NULL COMMENT '0已发送 1未发送, -状态针对极光',
+  `update_time` bigint(20) DEFAULT NULL,
+  `create_time` bigint(20) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `platform_plan_id` (`platform_plan_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='消息发送设置表';
+
+DROP TABLE IF EXISTS `hmm_send_list`;
+CREATE TABLE `hmm_send_list` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '发送列表id',
+  `name` varchar(20) DEFAULT NULL COMMENT '发送列表名称',
+  `comment` varchar(255) DEFAULT NULL COMMENT '发送列表备注',
+  `status` int(11) DEFAULT '0' COMMENT '状态 0:不可用 1:可用',
+  `update_time` bigint(20) DEFAULT NULL COMMENT '修改时间',
+  `create_time` bigint(20) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='发送列表信息表';
+
+DROP TABLE IF EXISTS `hmm_send_list_content`;
+CREATE TABLE `hmm_send_list_content` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `list_id` bigint(20) DEFAULT NULL COMMENT '发送列表id',
+  `title` varchar(255) DEFAULT NULL COMMENT '主标题',
+  `text` text COMMENT '内容',
+  `image_url` varchar(255) DEFAULT NULL COMMENT '图片地址',
+  `url` varchar(255) DEFAULT NULL COMMENT '跳转地址',
+  `app_id` varchar(255) DEFAULT NULL COMMENT 'appId',
+  `app_name` varchar(255) DEFAULT NULL COMMENT 'appName',
+  `type` int(10) DEFAULT NULL COMMENT '发送类型 1文本,2图片,3图片文本,4图文链接,5小程序',
+  `sort_id` bigint(32) DEFAULT NULL COMMENT '排序值',
+  `status` int(11) DEFAULT '0' COMMENT '状态 0:不可用 1:可用',
+  `update_time` bigint(20) DEFAULT NULL COMMENT '修改时间',
+  `create_time` bigint(20) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `list_id` (`list_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='发送内容表';
+
+DROP TABLE IF EXISTS `hmm_send_plan`;
+CREATE TABLE `hmm_send_plan` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `start_time` bigint(20) DEFAULT NULL COMMENT '计划开始时间',
+  `end_time` bigint(20) DEFAULT NULL COMMENT '计划结束时间',
+  `message_send_interval` int(11) DEFAULT '10' COMMENT '发送时间间隔',
+  `platform_list_id` bigint(20) DEFAULT NULL COMMENT '发送列表id',
+  `plan_comment` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '计划备注',
+  `status` int(11) DEFAULT NULL COMMENT '状态0:已完成 1:待执行 2:执行中',
+  `update_time` bigint(20) DEFAULT NULL COMMENT '修改时间',
+  `create_time` bigint(20) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='发送计划表';
+
+DROP TABLE IF EXISTS `hmm_user`;
+CREATE TABLE `hmm_user` (
+  `user_id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `telephone` varchar(32) DEFAULT NULL COMMENT '手机号',
+  `password` varchar(20) DEFAULT NULL COMMENT '密码',
+  `status` int(11) DEFAULT NULL COMMENT '状态 0:不可用 1:可用',
+  `update_time` bigint(32) DEFAULT NULL COMMENT '修改时间',
+  `create_time` bigint(32) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+
+DROP TABLE IF EXISTS `hmm_wechat`;
+CREATE TABLE `hmm_wechat` (
+  `wechat_id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '微信主键id',
+  `wechat_uin` varchar(255) DEFAULT NULL COMMENT '微信uin',
+  `wechat_name` tinyblob COMMENT '微信名称',
+  `device_id` bigint(20) DEFAULT NULL COMMENT '设备id',
+  `status` int(11) DEFAULT NULL COMMENT '状态 0: 离线 1:在线',
+  `update_time` bigint(32) DEFAULT NULL COMMENT '修改时间',
+  `create_time` bigint(32) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`wechat_id`),
+  KEY `wechat_uin` (`wechat_uin`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微信信息表';
+
+DROP TABLE IF EXISTS `hmm_wechat_group_relate`;
+CREATE TABLE `hmm_wechat_group_relate` (
+  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `wechat_id` bigint(32) DEFAULT NULL COMMENT '微信id',
+  `wechat_uin` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信uin',
+  `group_id` bigint(32) DEFAULT NULL COMMENT '微信群id',
+  `group_uin` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信群uin',
+  `status` int(11) DEFAULT NULL COMMENT '状态 0:不可用 1:可用2被管理',
+  `update_time` bigint(32) DEFAULT NULL COMMENT '修改时间',
+  `create_time` bigint(32) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `wechat_id` (`wechat_id`) USING BTREE,
+  KEY `group_id` (`group_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='微信和群关系表';
