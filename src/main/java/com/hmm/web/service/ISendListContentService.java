@@ -10,4 +10,6 @@ public interface ISendListContentService {
 
     int updateByPrimaryKeySelective(SendListContent record);
 
+    SendListContent selectTopOne(Long sendListId);
+    
 }

@@ -1,5 +1,7 @@
 package com.hmm.web.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +35,11 @@ public class GroupServiceImpl implements IGroupService {
 	@Override
 	public GroupWithBLOBs selectByGroupUin(String groupUin) {
 		return groupMapper.selectByGroupUin(groupUin);
+	}
+
+	@Override
+	public List<Long> selectGroupIdByPlatListId(Long platListId) {
+		return groupMapper.selectGroupIdByPlatListId(platListId);
 	}
 
 }

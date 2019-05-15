@@ -27,8 +27,8 @@ import cn.jpush.api.schedule.ScheduleResult;
 @Component
 public class JpushClientUtil {
 	
-	private final static String appKey = "9b2a61189eea7b766453d552";
-	private final static String masterSecret = "f46c10cc832de48a9f15f46d";
+	private final static String appKey = "afe1532a18bdb76fddf8522b";
+	private final static String masterSecret = "1f74492c1cd7c340f7c7d99f";
 	private static JPushClient jPushClient = new JPushClient(masterSecret, appKey);
 	private static ObjectMapper mapper = new ObjectMapper();
 

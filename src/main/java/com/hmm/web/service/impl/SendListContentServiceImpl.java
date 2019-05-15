@@ -30,4 +30,9 @@ public class SendListContentServiceImpl implements ISendListContentService {
 		return sendListContentMapper.updateByPrimaryKeySelective(record);
 	}
 
+	@Override
+	public SendListContent selectTopOne(Long sendListId) {
+		return sendListContentMapper.selectTopOne(sendListId);
+	}
+
 }

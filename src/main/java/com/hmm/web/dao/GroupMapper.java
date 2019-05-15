@@ -1,5 +1,7 @@
 package com.hmm.web.dao;
 
+import java.util.List;
+
 import com.hmm.web.domain.GroupWithBLOBs;
 
 public interface GroupMapper {
@@ -12,5 +14,8 @@ public interface GroupMapper {
     
 	//TODO
     GroupWithBLOBs selectByGroupUin(String groupUin);
+    
+	//TODO
+    List<Long> selectGroupIdByPlatListId(Long platListId);
     
 }

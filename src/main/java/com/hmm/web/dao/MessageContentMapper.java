@@ -16,6 +16,7 @@ public interface MessageContentMapper {
 	//TODO
     List<MessageContent> selectByMap(Map<String,Object> map);
     
+	//TODO
     void updateStatusByIds(List<Long> ids);
     
 }
