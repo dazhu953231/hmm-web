@@ -99,17 +99,31 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <sql id="extCriteria">
+  	<where>
+	  	<if test="id != null"> and id = #{id} </if>
+		<if test="wechatId != null"> and wechat_id = #{wechatId} </if>
+		<if test="wechatUin != null"> and wechat_uin = #{wechatUin} </if>
+		<if test="groupId != null"> and group_id = #{groupId} </if>
+		<if test="groupUin != null"> and group_uin = #{groupUin} </if>
+		<if test="status != null"> and status = #{status} </if>
+		<if test="updateTime != null"> and update_time = #{updateTime} </if>
+		<if test="createTime != null"> and create_time = #{createTime} </if>
+  	</where>
+  </sql>
 
   <select id="selectGroupUinByMap" resultType="java.lang.String">
     select group_uin 
     from hmm_wechat_group_relate
-    where id = #{id,jdbcType=BIGINT}
+    <include refid="extCriteria"></include>
   </select>
 
   <select id="selectIdByGroupIdNormal" parameterType="java.lang.Long" resultType="java.lang.Long">
     select id
     from hmm_wechat_group_relate
     where group_id = #{groupId,jdbcType=BIGINT}
+    and status = 1
   </select>
 
   <select id="selectByWechatIdGroupIdNormal" resultMap="BaseResultMap">
@@ -118,5 +132,6 @@
     from hmm_wechat_group_relate
     where wechat_id = #{wechatId,jdbcType=BIGINT}
     and group_id = #{groupId,jdbcType=BIGINT}
+    and status = 1
   </select>
 </mapper>
