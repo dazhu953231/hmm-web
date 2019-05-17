@@ -10,7 +10,6 @@ public interface DeviceMapper {
 
     int updateByPrimaryKeySelective(Device record);
     
-    //TODO
     Device selectByDeviceNo(String deviceNo);
     
 }

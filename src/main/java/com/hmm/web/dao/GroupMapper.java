@@ -12,10 +12,8 @@ public interface GroupMapper {
 
     int updateByPrimaryKeySelective(GroupWithBLOBs record);
     
-	//TODO
     GroupWithBLOBs selectByGroupUin(String groupUin);
     
-	//TODO
     List<Long> selectGroupIdByPlatListId(Long platListId);
     
 }

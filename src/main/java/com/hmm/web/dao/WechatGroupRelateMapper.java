@@ -13,13 +13,10 @@ public interface WechatGroupRelateMapper {
 
     int updateByPrimaryKeySelective(WechatGroupRelate record);
     
-	//TODO
     List<String> selectGroupUinByMap(Map<String,Object> map);
     
-	//TODO
     List<Long> selectIdByGroupIdNormal(Long groupId);
     
-	//TODO
-    WechatGroupRelate selectByWechatIdGroupIdNormal(Long wechatId,Long groupId);
+    WechatGroupRelate selectByWechatIdGroupIdNormal(Long wechatId, Long groupId);
     
 }

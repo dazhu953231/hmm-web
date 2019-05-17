@@ -10,7 +10,6 @@ public interface WechatMapper {
 
     int updateByPrimaryKeySelective(Wechat record);
     
-	//TODO
     Wechat selectByWechatUin(String wechatUin);
     
 }

@@ -100,4 +100,23 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+  <select id="selectGroupUinByMap" resultType="java.lang.String">
+    select group_uin 
+    from hmm_wechat_group_relate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectIdByGroupIdNormal" parameterType="java.lang.Long" resultType="java.lang.Long">
+    select id
+    from hmm_wechat_group_relate
+    where group_id = #{groupId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByWechatIdGroupIdNormal" resultMap="BaseResultMap">
+    select 
+    id,wechat_id,wechat_uin,group_id,group_uin,status,update_time,create_time
+    from hmm_wechat_group_relate
+    where wechat_id = #{wechatId,jdbcType=BIGINT}
+    and group_id = #{groupId,jdbcType=BIGINT}
+  </select>
 </mapper>

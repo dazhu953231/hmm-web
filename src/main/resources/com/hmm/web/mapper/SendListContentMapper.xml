@@ -152,4 +152,12 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+  <select id="selectTopOne" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    id,list_id,title,image_url,url,app_id,app_name,type,sort_id,status,update_time,create_time,text
+    from hmm_send_list_content
+    where list_id = #{sendListId,jdbcType=BIGINT}
+    and status = 1
+    LIMIT 0,1
+  </select>
 </mapper>

@@ -10,7 +10,6 @@ public interface SendListContentMapper {
 
     int updateByPrimaryKeySelective(SendListContent record);
 
-	//TODO
     SendListContent selectTopOne(Long sendListId);
     
 }

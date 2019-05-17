@@ -13,10 +13,8 @@ public interface MessageContentMapper {
 
     int updateByPrimaryKeySelective(MessageContent record);
     
-	//TODO
     List<MessageContent> selectByMap(Map<String,Object> map);
     
-	//TODO
     void updateStatusByIds(List<Long> ids);
     
 }

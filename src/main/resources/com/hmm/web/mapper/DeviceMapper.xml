@@ -80,5 +80,13 @@
     </set>
     where device_id = #{deviceId,jdbcType=BIGINT}
   </update>
+  
+  <select id="selectByDeviceNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    device_id,device_no,jm_id,status,update_time,create_time
+    from hmm_device
+    where device_no = #{deviceNo,jdbcType=BIGINT}
+  </select>
+  
 
 </mapper>

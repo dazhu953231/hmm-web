@@ -10,7 +10,6 @@ public interface UserMapper {
 
     int updateByPrimaryKeySelective(User record);
     
-	//TODO
-    User selectByTelephonePassword(String telephone,String password);
+    User selectByTelephonePassword(String telephone, String password);
     
 }

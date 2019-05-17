@@ -80,4 +80,11 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 
+  <select id="selectByTelephonePassword" resultMap="BaseResultMap">
+    select 
+    user_id,telephone,password,status,update_time,create_time
+    from hmm_user
+    where telephone = #{telephone,jdbcType=VARCHAR}
+    and password = #{password,jdbcType=VARCHAR}
+  </select>
 </mapper>

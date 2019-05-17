@@ -122,5 +122,17 @@
     </set>
     where group_id = #{groupId,jdbcType=BIGINT}
   </update>
-
+  
+  <select id="selectByGroupUin" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    group_id,group_uin,group_members,platform_list_id,platform_list_name,status,update_time,create_time,display_name,nick_name
+    from hmm_group
+    where group_uin = #{groupUin,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectGroupIdByPlatListId" parameterType="java.lang.Long" resultType="java.lang.Long">
+    select group_id
+    from hmm_group
+    where platform_list_id = #{platListId,jdbcType=BIGINT}
+  </select>
 </mapper>

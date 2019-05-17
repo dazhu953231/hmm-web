@@ -93,4 +93,33 @@
     where id = #{id} 
   </update>
   
+  <sql id="extCriteria">
+  	<where>
+		<if test="id != null"> and id = #{id} </if>
+		<if test="messageJmId != null"> and message_jm_id = #{messageJmId} </if>
+		<if test="jmId != null"> and jm_id = #{jmId} </if>
+		<if test="msgContent != null"> and msg_content = #{msgContent} </if>
+		<if test="status != null"> and status = #{status} </if>
+		<if test="updateTime != null"> and update_time = #{updateTime} </if>
+		<if test="createTime != null"> and create_time = #{createTime} </if>
+  	</where>
+  </sql>
+  
+  <select id="selectByMap" resultMap="ResultMapWithBLOBs" >
+    select 
+    id,message_jm_id,jm_id,msg_content,status,update_time,create_time 
+    from hzz_message_content 
+    <include refid="extCriteria"></include>
+  </select>
+  
+  <update id="updateStatusByIds" >
+    update hzz_message_content 
+    set status = 0
+    where 1 = 1
+    <if test="ids != null">
+		and id in 
+		<foreach collection="ids" open="(" close=")" separator="," item="d">#{d}</foreach>
+	</if> 
+  </update>
+  
 </mapper>

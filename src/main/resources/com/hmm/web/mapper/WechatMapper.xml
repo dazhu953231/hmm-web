@@ -92,4 +92,10 @@
     where wechat_id = #{wechatId,jdbcType=BIGINT}
   </update>
 
+  <select id="selectByWechatUin" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    wechat_id,wechat_uin,device_id,status,update_time,create_time,wechat_name
+    from hmm_wechat
+    where wechat_uin = #{wechatUin,jdbcType=VARCHAR}
+  </select>
 </mapper>
